@@ -1,0 +1,113 @@
+/* general */
+.home_page {
+  min-height: 500px;
+}
+
+.section {
+  justify-content: left;
+  align-items: center;
+  margin: 0 80px 60px 80px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.heading {
+  margin-bottom: 25px;
+  font-size: 30px;
+  text-align: left;
+}
+
+/* detail */
+.hero_section {
+  background-image: url(https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=2560);
+  width: 100%;
+  height: 612px;
+  background-position: center;
+  background-position-y: -150px;
+  background-size: cover;
+  background-blend-mode: difference;
+  margin: 0 0 30px 0;
+  justify-content: center;
+}
+.hero_content {
+  margin-top: 5rem;
+}
+
+.hero__title {
+  font-size: 20px;
+}
+.action__btn {
+  width: 200px;
+  height: 60px;
+  line-height: 60px;
+  background-color: white;
+  color: rgb(179, 11, 179);
+  font-size: 21px;
+  margin: 1rem auto;
+  border-radius: 2rem;
+  text-align: center;
+  box-shadow: 10px 8px 20px #d6cccc;
+  cursor: pointer;
+}
+
+/* explore-section */
+.explore_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.place_item {
+  width: 25%;
+}
+
+/* home-section */
+.home_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.home_item {
+  width: 24%;
+}
+
+/* home-section */
+.acti_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.acti_item {
+  width: 32%;
+}
+
+/* hosting_section */
+.hosting_container{
+  display: flex;
+  background-image: url(https://a0.muscache.com/im/pictures/2595054e-d1d9-4fde-8046-58d51fcb3164.jpg?im_w=1440);
+  background-color: yellow;
+  width: 100%;
+  height: 480px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.hosting_content{
+    color: white;
+    font-size: 21px;
+    width: 400px;
+    margin: auto 5rem;
+}
+.hosting_content h2{
+    font-size: 3rem;
+}
+.hosting_content button{
+    outline: none;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 20px;
+    padding: 0.7rem 1rem;
+    margin: 1.5rem 0;
+    cursor: pointer;
+}

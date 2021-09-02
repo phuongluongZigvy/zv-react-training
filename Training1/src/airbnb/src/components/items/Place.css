@@ -1,0 +1,21 @@
+.row{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    /* background-color: tomato; */
+}
+.col img{
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+}
+.content{
+    margin-left: 1rem;
+    text-align: left;
+    /* background-color: turquoise; */
+}
+.drive_time{
+    font-family: 'NunitoSans-Regular';
+}
