@@ -32,10 +32,10 @@
   margin-top: 5rem;
 }
 
-.hero__title {
+.hero_title {
   font-size: 20px;
 }
-.action__btn {
+.action_btn {
   width: 200px;
   height: 60px;
   line-height: 60px;

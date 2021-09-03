@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 export default function Header() {
-  const changeColorNavbar = () => {
-    if (window.scrollY >= 50) {
-      console.log("scroll");
-      document.querySelector(".header").classList.add("white_header");
-    } else {
-      document.querySelector(".header").classList.remove("white_header");
-    }
-  };
 
-  window.addEventListener("scroll", changeColorNavbar);
+  const [scrollY, setScrollY] = useState(0);
+
+  window.addEventListener("scroll", ()=>{setScrollY(window.scrollY)} )
 
   return (
-    <div className="header">
+    <div className={scrollY>=50?'header white_header':'header'}>
       <h2 className="logo">Airbnb</h2>
       <div className="tabs">
         <h4>Places to stay</h4>
