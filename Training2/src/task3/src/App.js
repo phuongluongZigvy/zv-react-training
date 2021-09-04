@@ -3,32 +3,28 @@ import "./App.css";
 
 function App() {
   const [value, setValue] = useState("");
-  const [valueCountDown, setValueCountDown] = useState(-1);
-  const [startCountDown, setStartCountDown] = useState(false);
+  const [valueCountDown, setValueCountDown] = useState(0);
   const [isStop, setIsStop] = useState(false);
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   useEffect(() => {
-    !isStop &&
-      valueCountDown > 0 &&
-      setTimeout(() => {
+      const countdown = setTimeout(() => {
+        if (valueCountDown>0 && isStop===false)
         setValueCountDown(valueCountDown - 1);
       }, 1000);
+      return ()=>clearTimeout(countdown);
   }, [valueCountDown, isStop]);
 
   function handleCountdown(number) {
     console.log(number);
-    setValue("");
-    setStartCountDown(true);
     setIsStop(false);
     setValueCountDown(number);
+    setValue("");
   }
 
   function handleClick(value) {
-    const typeOfValue = typeof value;
-    console.log(typeOfValue);
     if (value.length === 0) {
       alert("Please input a number");
     } else if (isNaN(value) === false) {
@@ -49,7 +45,7 @@ function App() {
         onChange={handleChange}
       />
       <button onClick={() => handleClick(value)}>Start</button>
-      {startCountDown && (
+      {
         <div>
           <h3>{valueCountDown}</h3>
           {!isStop ? (
@@ -70,7 +66,7 @@ function App() {
             </button>
           )}
         </div>
-      )}
+      }
     </div>
   );
 }
