@@ -2,29 +2,29 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [value, setValue] = useState("");
-  const [valueCountDown, setValueCountDown] = useState(-1);
+  const [stateCountDown, setStateCountDown] = useState({
+    valueCountDown: 0,
+    isStop: true,
+  });
   const [startCountDown, setStartCountDown] = useState(false);
-  const [isStop, setIsStop] = useState(false);
+  const [renderedNumber, setRenderNumber] = useState(0);
+  const [value, setValue] = useState("");
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   useEffect(() => {
-    !isStop &&
-      valueCountDown > 0 &&
-      setTimeout(() => {
-        setValueCountDown(valueCountDown - 1);
-      }, 1000);
-  }, [valueCountDown, isStop]);
-
-  function handleCountdown(number) {
-    console.log(number);
-    setValue("");
-    setStartCountDown(true);
-    setIsStop(false);
-    setValueCountDown(number);
-  }
+    let counter = stateCountDown.valueCountDown;
+    const interval = setInterval(() => {
+      counter--;
+      if (counter < 0 || stateCountDown.isStop) return clearInterval(interval);
+      setRenderNumber(counter);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [stateCountDown]);
 
   function handleClick(value) {
     const typeOfValue = typeof value;
@@ -34,7 +34,14 @@ function App() {
     } else if (isNaN(value) === false) {
       if (value <= 0) alert("Number must be greater than 0");
       else {
-        handleCountdown(value);
+        setRenderNumber(value);
+        setValue("");
+        setStartCountDown(true);
+        setStateCountDown({
+          ...stateCountDown,
+          valueCountDown: value,
+          isStop: false,
+        });
       }
     } else alert("Invalid input. Must be a number");
   }
@@ -51,11 +58,11 @@ function App() {
       <button onClick={() => handleClick(value)}>Start</button>
       {startCountDown && (
         <div>
-          <h3>{valueCountDown}</h3>
-          {!isStop ? (
+          <h3>{renderedNumber}</h3>
+          {!stateCountDown.isStop ? (
             <button
               onClick={() => {
-                setIsStop(true);
+                setStateCountDown({ ...stateCountDown, isStop: true });
               }}
             >
               Stop
@@ -63,7 +70,11 @@ function App() {
           ) : (
             <button
               onClick={() => {
-                setIsStop(false);
+                setStateCountDown({
+                  ...stateCountDown,
+                  isStop: false,
+                  valueCountDown: renderedNumber,
+                });
               }}
             >
               Continue

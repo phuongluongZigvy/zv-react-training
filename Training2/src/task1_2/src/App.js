@@ -1,26 +1,24 @@
 import "./App.css";
-import CloseButton from "./CloseButton";
 import { useState } from "react";
 import Modal from "./Modal";
 
 function App() {
-  const [isClosed, setIsClosed] = useState(false);
+  const [isOpend, setIsOpend] = useState(false);
   const handleClick = () => {
-    setIsClosed(true);
-    console.log("hi", isClosed);
+    setIsOpend(false);
+    console.log("hi");
   };
   return (
     <div className="App">
       <h1>TRANING2 TASK 1+2</h1>
-      {isClosed === false ? (
-        <Modal>
+      {isOpend ? (
+        <Modal handleClick={handleClick}>
           <h2>Wellcome to modal ^^</h2>
-          <CloseButton onButtonClick={handleClick} />
         </Modal>
       ) : (
         <button
           onClick={() => {
-            setIsClosed(false);
+            setIsOpend(true);
           }}
         >
           Open model

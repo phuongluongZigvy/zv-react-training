@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 export default function Header() {
 
   const [scrollY, setScrollY] = useState(0);
 
-  window.addEventListener("scroll", ()=>{setScrollY(window.scrollY)} )
+  useEffect(() => {
+    window.addEventListener("scroll", ()=>{setScrollY(window.scrollY)} )
+    console.log('start listen')
+    return ()=>{
+      window.removeEventListener("scroll",()=>{setScrollY(0)})
+    }
+  }, [])
 
   return (
     <div className={scrollY>=50?'header white_header':'header'}>

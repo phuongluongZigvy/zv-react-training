@@ -8,20 +8,24 @@ function App() {
     setIsOpen(!isOpen);
   }
   useEffect(() => {
-    if (isOpen === true) {
-      const modal = document.querySelector(".Modal");
-      console.log(modal);
-      modal.addEventListener('keypress', (e) => {
+    if (isOpen) {
+      window.addEventListener("keypress", (e) => {
         var name = e.key;
         alert(`Key pressed: ${name}`);
       });
+    } else {
+      window.removeEventListener("keypress", () => {});
     }
   }, [isOpen]);
-
+  
   return (
     <div className="App">
       <h1>TRAINING 3 TASKS</h1>
-      {isOpen===false?<button onClick={handleClick}>Open modal</button>:<button onClick={handleClick}>Close Modal</button>}
+      {isOpen === false ? (
+        <button onClick={handleClick}>Open modal</button>
+      ) : (
+        <button onClick={handleClick}>Close Modal</button>
+      )}
       {isOpen && <Modal />}
     </div>
   );

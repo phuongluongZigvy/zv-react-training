@@ -1,5 +1,11 @@
-import React from "react";
+
+import CloseButton from "./CloseButton";
 
 export default function Modal(props) {
-  return <div>{props.children}</div>;
+  return (
+    <>
+          {props.children}
+          <CloseButton onButtonClick={()=>{props.handleClick()}} />
+    </>
+  );
 }
