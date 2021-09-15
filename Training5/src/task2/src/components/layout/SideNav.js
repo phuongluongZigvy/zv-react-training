@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 const SideBar = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 30%;
-  margin-left: 3rem;
-  margin-top: 2rem;
-  & a:hover{
+  background-color: darkgrey;
+  width: 20%;
+  & a:hover {
     color: deeppink;
   }
   & .nav_link {
+    display: block;
     width: 100%;
+    margin-left: 3rem;
+    margin-top: 2rem;
     color: darkblue;
     text-decoration: none;
     font-size: 1.5rem;
