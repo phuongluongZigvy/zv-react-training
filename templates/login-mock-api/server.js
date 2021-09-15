@@ -57,7 +57,7 @@ router.post('/login', async function(req, res) {
   try {
     const token = await jwt.signToken(payload);
     res.json({
-      token,
+      token
     });
   } catch (error) {
     res.status(500).json({
@@ -88,7 +88,7 @@ routerAuth.get('/users', function(req, res) {
 
 app.use('/', router);
 
-app.use('/api', authMiddleware, routerAuth);
+app.use('/app', authMiddleware, routerAuth);
 
 app.listen(port);
 console.log('Server running on port ' + port);

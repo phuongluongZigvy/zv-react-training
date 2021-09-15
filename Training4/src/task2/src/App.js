@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import Country from "./Country";
 import { debounce } from "lodash";
 
@@ -16,17 +16,17 @@ function App() {
       })
   };
 
-  const searchCountry = () => {
+  const searchCountry = (searchTerm) => {
     if (searchTerm.length > 0) {
       console.log(searchTerm);
       getAPI(`https://restcountries.eu/rest/v2/name/${searchTerm}`);
     } else getAPI("https://restcountries.eu/rest/v2/all");
   };
 
-  const searchTermLimit = debounce(searchCountry, 1000);
+  const searchTermLimit = debounce((searchTerm)=> searchCountry(searchTerm), 1000);
 
   useEffect(() => {
-    searchTermLimit();
+    searchTermLimit(searchTerm);
     return searchTermLimit.cancel;
   }, [searchTerm]);
 

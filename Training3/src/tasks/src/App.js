@@ -8,16 +8,16 @@ function App() {
     setIsOpen(!isOpen);
   }
   useEffect(() => {
-    if (isOpen) {
-      window.addEventListener("keypress", (e) => {
-        var name = e.key;
-        alert(`Key pressed: ${name}`);
-      });
-    } else {
-      window.removeEventListener("keypress", () => {});
-    }
+    const getKey = (e) => {
+      var name = e.key;
+      alert(`Key pressed: ${name}`);
+    };
+    window.addEventListener("keypress", getKey);
+    return () => {
+      window.removeEventListener("keypress", getKey);
+    };
   }, [isOpen]);
-  
+
   return (
     <div className="App">
       <h1>TRAINING 3 TASKS</h1>

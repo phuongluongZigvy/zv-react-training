@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import {throttle} from 'lodash';
 
 function App() {
   const [joke, setJoke] = useState("");
-  const controlClick= throttle(()=>getJoke(), 8000);
+  const controlClick= useCallback(()=>{throttle(()=>getJoke(), 8000)},[]) ;
 
   function getJoke() {
     fetch("https://official-joke-api.appspot.com/random_joke")
