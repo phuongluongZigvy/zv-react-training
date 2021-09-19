@@ -1,9 +1,16 @@
-export const AuthUser = (user) => {
+export const AuthUser = (info) => {
   return {
     type: "AUTH_USER",
-    payload: user,
+    payload: info,
   };
 };
+
+export const Logout = () => {
+  return {
+    type: "LOG_OUT",
+  };
+};
+
 
 
 export const GetUsers = (users) => {

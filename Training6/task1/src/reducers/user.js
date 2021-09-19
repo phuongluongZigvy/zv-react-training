@@ -1,21 +1,36 @@
 const initialState = {
-  accessToken: '',
+  accessToken: "",
   user: {},
   isAuth: false,
   isAdmin: false,
-  users:[],
+  users: [],
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "AUTH_USER": {
-      console.log('user',action.payload);
+    // case "AUTH_USER": {
+    //   return {
+    //     ...state
+    //   }
+    // }
+    case "AUTH_USER_SUCCESS": {
+      console.log("user", action.payload);
       return {
         ...state,
         user: action.payload.user,
         accessToken: action.payload.accessToken,
-        isAuth: true
+        isAuth: true,
+      };
+    }
+    case "AUTH_USER_FAILED":{
+      return {
+        ...state
       }
+    }
+    case "LOG_OUT": {
+      return {
+        initialState,
+      };
     }
     case "GET_USERS": {
       return {

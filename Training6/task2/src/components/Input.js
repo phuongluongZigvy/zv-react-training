@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { AddTask } from "../actions/task";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
 
 const Container = styled.form`
   width: 70%;
@@ -16,9 +18,32 @@ const Container = styled.form`
 `;
 
 export default function Input(props) {
+  const dispatch = useDispatch();
+  const [task, setTask] = useState("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    const randomNumber = () => {
+      return 1000 + Math.trunc(Math.random() * 9000);
+    };
+    const newId = randomNumber();
+    const action = AddTask({
+      id: `mytodo${newId}`,
+      content: task,
+      state: "draft",
+    });
+    dispatch(action);
+    setTask("");
+  }
   return (
-    <Container>
-      <input type="text" placeholder="Text Input" />
+    <Container onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={task}
+        placeholder="Text Input"
+        onChange={(e) => {
+          setTask(e.target.value);
+        }}
+      />
       <Button type="submit" text="+Task"></Button>
     </Container>
   );

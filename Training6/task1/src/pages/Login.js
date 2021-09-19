@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { authUser } from "../api";
-import jwt_decode from "jwt-decode";
+// import { authUser } from "../api";
+// import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { AuthUser } from "../actions/user";
 
@@ -37,16 +37,18 @@ export default function Login() {
   const dispatch = useDispatch();
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(info);
     console.log("submit");
-    authUser(info).then((data) => {
-      console.log('data login',data);
-      if (data.token) {
-        const user = jwt_decode(data.token);
-        const action = AuthUser({ user: user, accessToken: data.token });
-        dispatch(action);
-      } else alert(data.error);
-    });
+    // authUser(info).then((data) => {
+    //   console.log('data login',data);
+    //   if (data.token) {
+    //     const user = jwt_decode(data.token);
+    //     const action = AuthUser({ user: user, accessToken: data.token });
+    //     dispatch(action);
+    //   } else alert(data.error);
+    // });
+
+    const action = AuthUser(info);
+    dispatch(action);
   }
 
   function handleForm(e) {

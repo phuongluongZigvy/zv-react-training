@@ -21,10 +21,3 @@ const store = compose(applyMiddleware(...middleware))(createStore)(persistedRedu
 export const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);
 export default store;
-
-// const sagaMiddleware = createSagaMiddleware();
-// const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-
-// sagaMiddleware.run(rootSaga);
-
-// export default store;

@@ -1,0 +1,1 @@
+export const online = ((state) => state.network.status);
