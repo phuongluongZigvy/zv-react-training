@@ -4,7 +4,7 @@ import Task from "./components/Task";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeStatusNetwork } from "./actions/network";
-import { Resubmit } from "./actions/task";
+import { HandleTask, Resubmit } from "./actions/task";
 
 const Status = styled.div`
   display: flex;
@@ -26,14 +26,14 @@ function App() {
   const online = useSelector((state) => state.network.status);
   const listTask = useSelector((state) => state.task.listTask);
   console.log("list", listTask);
+
   function handleNetwork() {
     const action = ChangeStatusNetwork();
     dispatch(action);
     console.log("status", online);
     const listTaskPending = listTask.filter(
-      (task) => task.state === "submitting"
+      (task) => task.state === "submitting" || task.state === "ready"
     );
-    console.log("tasks pendding", listTaskPending);
     listTaskPending.map((task) => {
       const action2 = Resubmit(task);
       dispatch(action2);

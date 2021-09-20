@@ -32,14 +32,19 @@ function* handleTask(action) {
 
 function* handleResubmit(action) {
   try {
-    yield put(Submitting(action.payload));
-    console.log("submitting");
-    yield delay(2000);
+    if (action.payload.state === "error") {
+      yield put(ReadyUpdate(action.payload));
+      yield delay(2000);
+    };
+
     const online = yield select(network.online);
     console.log("network status", online);
-    const success = Math.random() < 0.5;
-    console.log("result submit", success);
+
     if (online) {
+      yield put(Submitting(action.payload));
+      yield delay(2000);
+      const success = Math.random() < 0.5;
+      console.log("result submit", success);
       if (success) yield put(SubmitSuccess(action.payload));
       else yield put(SubmitError(action.payload));
     }
