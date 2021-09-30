@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { FilterAll, FilterCompleted, FilterUnCompleted } from "../actions/todo";
+import { filterAll, filterCompleted, filterUnCompleted } from "../actions/todo";
 
 const FilterContainer = styled.div`
   display: flex;
@@ -37,32 +37,41 @@ const FilterItem = styled.p`
 
 export default function Filter() {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.todo.filter);
-  console.log("filter", filter);
+  const filter = useSelector((state) => state.todo.isLoadCompleted);
 
-  function handleAllClick(){
-    const action = FilterAll();
+  function handleAllClick() {
+    const action = filterAll();
     dispatch(action);
   }
 
-  function handleCompletedClick(){
-    const action = FilterCompleted();
+  function handleCompletedClick() {
+    const action = filterCompleted();
     dispatch(action);
   }
 
-  function handleUncompletedClick(){
-    const action = FilterUnCompleted();
+  function handleUncompletedClick() {
+    const action = filterUnCompleted();
     dispatch(action);
   }
-
 
   return (
     <FilterContainer>
-      <FilterItem active={filter === "all" ? true : false} onClick={handleAllClick}>All</FilterItem>
-      <FilterItem active={filter === "completed" ? true : false} onClick={handleCompletedClick}>
+      <FilterItem
+        active={filter === null ? true : false}
+        onClick={handleAllClick}
+      >
+        All
+      </FilterItem>
+      <FilterItem
+        active={filter === true ? true : false}
+        onClick={handleCompletedClick}
+      >
         Completed
       </FilterItem>
-      <FilterItem active={filter === "uncompleted" ? true : false}onClick={handleUncompletedClick}>
+      <FilterItem
+        active={filter === false ? true : false}
+        onClick={handleUncompletedClick}
+      >
         UnCompleted
       </FilterItem>
     </FilterContainer>

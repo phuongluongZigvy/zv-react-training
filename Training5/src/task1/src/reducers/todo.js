@@ -1,9 +1,9 @@
 const initialState = {
-  Todos: [],
+  todos: [],
   isOpenForm: false,
-  editTodo: {},
-  filter: "all",
-  renderList: [],
+  editTodoId: null,
+  isLoadCompleted: null,
+  searchValue: '',
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -11,24 +11,22 @@ const todoReducer = (state = initialState, action) => {
     case "GET_TODOS": {
       return {
         ...state,
-        Todos: action.payload,
-        renderList: action.payload,
+        todos: action.payload,
       };
     }
     case "ADD_NEW_TODO": {
-      const newList = [...state.Todos];
+      const newList = [...state.todos];
       newList.push(action.payload);
       console.log("newList", newList);
       return {
         ...state,
-        Todos: newList,
-        renderList: newList,
-        filter: "all",
+        todos: newList,
+        searchValue: '',
       };
     }
     case "SET_COMPLETED_TODO": {
-      const newList = [...state.Todos].map((todo) => {
-        if (todo.id === action.payload.id)
+      const newList = state.todos.map((todo) => {
+        if (todo.id === action.payload)
           return {
             ...todo,
             completed: !todo.completed,
@@ -38,24 +36,22 @@ const todoReducer = (state = initialState, action) => {
       console.log("newList", newList);
       return {
         ...state,
-        Todos: newList,
-        renderList: newList,
+        todos: newList,
       };
     }
     case "DELETE_TODO": {
-      const newList = [...state.Todos].filter((todo) => {
-        return todo.id !== action.payload.id;
+      const newList = state.todos.filter((todo) => {
+        return todo.id !== action.payload;
       });
       console.log("newList", newList);
       return {
         ...state,
-        Todos: newList,
-        renderList: newList,
+        todos: newList,
       };
     }
     case "EDIT_TODO": {
-      const newList = [...state.Todos].map((todo) => {
-        if (todo.id === action.payload.id)
+      const newList = state.todos.map((todo) => {
+        if (todo.id === state.editTodoId)
           return {
             ...todo,
             name: action.payload.name,
@@ -65,10 +61,8 @@ const todoReducer = (state = initialState, action) => {
       console.log("newList", newList);
       return {
         ...state,
-        Todos: newList,
-        renderList: newList,
+        todos: newList,
         isOpenForm: false,
-        editTodo: {},
       };
     }
 
@@ -76,43 +70,39 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         isOpenForm: true,
-        editTodo: action.payload,
+        editTodoId: action.payload,
       };
     }
     case "CLOSE_FORM_EDIT": {
       return {
         ...state,
         isOpenForm: false,
-        editTodo: {},
+        editTodoId: null,
       };
     }
     case "FILTER_COMPLETED": {
-      const newList = [...state.Todos].filter((todo) => {
-        return todo.completed === true;
-      });
       return {
         ...state,
-        filter: "completed",
-        renderList: newList,
+        isLoadCompleted: true,
       };
     }
     case "FILTER_UNCOMPLETED": {
-      const newList = [...state.Todos].filter((todo) => {
-        return todo.completed === false;
-      });
       return {
         ...state,
-        filter: "uncompleted",
-        renderList: newList,
+        isLoadCompleted: false,
       };
     }
     case "FILTER_ALL": {
-      const newList = [...state.Todos];
       return {
         ...state,
-        filter: "all",
-        renderList: newList,
+        isLoadCompleted: null,
       };
+    }
+    case "SEARCH_TODO": {
+      return {
+        ...state,
+        searchValue: action.payload
+      }
     }
     default:
       return state;

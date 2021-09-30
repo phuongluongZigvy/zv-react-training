@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {useDispatch} from 'react-redux';
-import { AddNewTodo } from "../actions/todo";
+import { addNewTodo, searchTodo } from "../actions/todo";
 
 const TodoForm = styled.form`
 width: 50%;
@@ -41,13 +41,20 @@ export default function TodoCreate() {
             name: todoValue,
             completed: false
         }
-        const action = AddNewTodo(newTodo);
+        const action = addNewTodo(newTodo);
         dispatch(action);
         e.target.reset();
     }
+
+    function handleInputValue(e) {
+        setTodoValue(e.target.value);
+        const action = searchTodo(e.target.value);
+        dispatch(action);
+    }
+    
     return (
         <TodoForm onSubmit={handleSubmit}>
-            <input type="text" onChange={(e)=>setTodoValue(e.target.value)} placeholder="Write new todo here"/>
+            <input type="text" onChange={handleInputValue} placeholder="Write new todo here"/>
             <button type="submit">Create</button>
         </TodoForm>
     )

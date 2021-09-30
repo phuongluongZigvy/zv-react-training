@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { CloseFormEdit, EditTodo } from "../actions/todo";
+import { closeFormEdit, editTodo } from "../actions/todo";
 
 const EditForm = styled.form`
   width: 40%;
@@ -46,14 +46,16 @@ const EditForm = styled.form`
   }
 `;
 export default function TodoEdit() {
-  const todo = useSelector((state) => state.todo.editTodo);
+  const id = useSelector((state) => state.todo.editTodoId);
+  const todos = useSelector((state) => state.todo.todos);
+  const todo = todos.find(todo=>(todo.id===id));
   const isDisplay =  useSelector((state) => state.todo.isOpenForm);
   const [todoValue, setTodoValue] = useState('');
   
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    setTodoValue(todo.name);
+    if (todo) setTodoValue(todo.name);
   },[todo])
 
   function handleSubmit(e) {
@@ -62,12 +64,12 @@ export default function TodoEdit() {
       ...todo,
       name: todoValue,
     };
-    const action = EditTodo(newTodo);
+    const action = editTodo(newTodo);
     dispatch(action);
   }
 
   function handleCancle(e) {
-    const action = CloseFormEdit();
+    const action = closeFormEdit();
     dispatch(action);
   }
 

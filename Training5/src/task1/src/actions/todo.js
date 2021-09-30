@@ -1,65 +1,51 @@
-export const GetTodos = (todos)=>{
-    return {
-        type: 'GET_TODOS',
-        payload: todos,
-    }
-}
+export const getTodos = (todos) => ({
+  type: "GET_TODOS",
+  payload: todos,
+});
 
-export const AddNewTodo = (todo)=>{
-    return {
-        type: 'ADD_NEW_TODO',
-        payload: todo,
-    }
-}
+export const addNewTodo = (todo) => ({
+  type: "ADD_NEW_TODO",
+  payload: todo,
+});
 
-export const SetCompletedTodo = (todo)=>{
-    return {
-        type: 'SET_COMPLETED_TODO',
-        payload: todo,
-    }
-}
+export const setCompletedTodo = (id) => ({
+  type: "SET_COMPLETED_TODO",
+  payload: id,
+});
 
-export const DeleteTodo = (todo)=>{
-    return {
-        type: 'DELETE_TODO',
-        payload: todo,
-    }
-}
+export const deleteTodo = (id) => ({
+  type: "DELETE_TODO",
+  payload: id,
+});
 
-export const EditTodo = (todo)=>{
-    return {
-        type: 'EDIT_TODO',
-        payload: todo,
-    }
-}
+export const editTodo = (todo) => ({
+  type: "EDIT_TODO",
+  payload: todo,
+});
 
-export const OpenFormEdit = (todo)=>{
-    return {
-        type: 'OPEN_FORM_EDIT',
-        payload: todo,
-    }
-}
+export const openFormEdit = (id) => ({
+  type: "OPEN_FORM_EDIT",
+  payload: id,
+});
 
-export const CloseFormEdit = ()=>{
-    return {
-        type: 'CLOSE_FORM_EDIT',
-    }
-}
+export const closeFormEdit = () => ({
+  type: "CLOSE_FORM_EDIT",
+});
 
-export const FilterCompleted = ()=>{
-    return {
-        type: 'FILTER_COMPLETED',
-    }
-}
+export const filterCompleted = () => ({
+  type: "FILTER_COMPLETED",
+});
 
-export const FilterUnCompleted = ()=>{
-    return {
-        type: 'FILTER_UNCOMPLETED',
-    }
-}
+export const filterUnCompleted = () => ({
+  type: "FILTER_UNCOMPLETED",
+});
 
-export const FilterAll = ()=>{
-    return {
-        type: 'FILTER_ALL',
-    }
-}
+export const filterAll = () => ({
+  type: "FILTER_ALL",
+});
+
+export const searchTodo = (value) => ({
+    type: "SEARCH_TODO",
+    payload: value
+  });
+  
