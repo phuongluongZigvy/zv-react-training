@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState} from "react";
 import "./App.css";
 import Filter from "./components/Filter";
 import Todo from "./components/Todo";
@@ -13,6 +13,7 @@ import {
 } from "./actions/todo";
 import TodoEdit from "./components/TodoEdit";
 
+
 function App() {
   const dispatch = useDispatch();
   const listTodos = useSelector((state) => state.todo.todos);
@@ -20,7 +21,7 @@ function App() {
   const searchValue = useSelector((state) => state.todo.searchValue);
   const [listTodosRender, setListTodosRender] = useState(listTodos);
 
-  useEffect(() => {
+  useMemo(() => {
     fetchTodos().then((newList) => {
       const action = getTodos(newList);
       dispatch(action);
@@ -31,32 +32,41 @@ function App() {
     let newList = listTodos;
     if (filter !== null) {
       newList = listTodos.filter((todo) => todo.completed === filter);
-    };
+    }
     if (searchValue) {
       newList = newList.filter((todo) => todo.name.includes(searchValue));
     }
     setListTodosRender(newList);
   }, [filter, listTodos, searchValue]);
 
-  function handleCompletedTodo(todo) {
-    const action = setCompletedTodo(todo.id);
-    dispatch(action);
-  }
+  const handleCompletedTodo = useCallback(
+    (todo) => {
+      const action = setCompletedTodo(todo.id);
+      dispatch(action);
+    },
+    [dispatch]
+  );
 
-  function handleDeleteTodo(todo) {
-    const action = deleteTodo(todo.id);
-    dispatch(action);
-  }
+  const handleDeleteTodo = useCallback(
+    (todo) => {
+      const action = deleteTodo(todo.id);
+      dispatch(action);
+    },
+    [dispatch]
+  );
 
-  function handleEditTodo(todo) {
-    const action = openFormEdit(todo.id);
-    dispatch(action);
-  }
+  const handleEditTodo = useCallback(
+    (todo) => {
+      const action = openFormEdit(todo.id);
+      dispatch(action);
+    },
+    [dispatch]
+  );
 
   return (
     <div className="App">
       <h1>TRAINING 5 TASK 1</h1>
-      <TodoCreate />
+      <TodoCreate/>
       <Filter />
       {listTodosRender.map((todo) => {
         return (

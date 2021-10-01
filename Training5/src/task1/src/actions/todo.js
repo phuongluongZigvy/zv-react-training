@@ -8,6 +8,11 @@ export const addNewTodo = (todo) => ({
   payload: todo,
 });
 
+export const addNewTodoSuccess = (todo) => ({
+  type: "ADD_NEW_TODO_SUCCESS",
+  payload: todo,
+});
+
 export const setCompletedTodo = (id) => ({
   type: "SET_COMPLETED_TODO",
   payload: id,
@@ -32,17 +37,10 @@ export const closeFormEdit = () => ({
   type: "CLOSE_FORM_EDIT",
 });
 
-export const filterCompleted = () => ({
-  type: "FILTER_COMPLETED",
-});
-
-export const filterUnCompleted = () => ({
-  type: "FILTER_UNCOMPLETED",
-});
-
-export const filterAll = () => ({
-  type: "FILTER_ALL",
-});
+export const changeFilter =(value)=>({
+  type: "CHANGE_FILTER",
+  payload: value
+})
 
 export const searchTodo = (value) => ({
     type: "SEARCH_TODO",

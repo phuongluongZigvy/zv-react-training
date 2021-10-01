@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { filterAll, filterCompleted, filterUnCompleted } from "../actions/todo";
+import { changeFilter } from "../actions/todo";
+
 
 const FilterContainer = styled.div`
   display: flex;
@@ -39,38 +40,35 @@ export default function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.todo.isLoadCompleted);
 
-  function handleAllClick() {
-    const action = filterAll();
-    dispatch(action);
-  }
 
-  function handleCompletedClick() {
-    const action = filterCompleted();
-    dispatch(action);
-  }
-
-  function handleUncompletedClick() {
-    const action = filterUnCompleted();
+  function handleClick(value){
+    const action = changeFilter(value);
     dispatch(action);
   }
 
   return (
     <FilterContainer>
       <FilterItem
-        active={filter === null ? true : false}
-        onClick={handleAllClick}
+        active={filter === null}
+        onClick= {()=>{
+          handleClick(null)
+        }}
       >
         All
       </FilterItem>
       <FilterItem
-        active={filter === true ? true : false}
-        onClick={handleCompletedClick}
+        active={filter === true}
+        onClick= {()=>{
+          handleClick(true)
+        }}
       >
         Completed
       </FilterItem>
       <FilterItem
-        active={filter === false ? true : false}
-        onClick={handleUncompletedClick}
+        active={filter === false}
+        onClick= {()=>{
+          handleClick(false)
+        }}
       >
         UnCompleted
       </FilterItem>

@@ -4,6 +4,7 @@ const initialState = {
   editTodoId: null,
   isLoadCompleted: null,
   searchValue: '',
+  isLoading: false
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -17,12 +18,18 @@ const todoReducer = (state = initialState, action) => {
     case "ADD_NEW_TODO": {
       const newList = [...state.todos];
       newList.push(action.payload);
-      console.log("newList", newList);
       return {
         ...state,
         todos: newList,
         searchValue: '',
+        isLoading: true
       };
+    }
+    case "ADD_NEW_TODO_SUCCESS": {
+      return {
+        ...state,
+        isLoading: false
+      }
     }
     case "SET_COMPLETED_TODO": {
       const newList = state.todos.map((todo) => {
@@ -80,23 +87,11 @@ const todoReducer = (state = initialState, action) => {
         editTodoId: null,
       };
     }
-    case "FILTER_COMPLETED": {
+    case "CHANGE_FILTER": {
       return {
         ...state,
-        isLoadCompleted: true,
-      };
-    }
-    case "FILTER_UNCOMPLETED": {
-      return {
-        ...state,
-        isLoadCompleted: false,
-      };
-    }
-    case "FILTER_ALL": {
-      return {
-        ...state,
-        isLoadCompleted: null,
-      };
+        isLoadCompleted: action.payload
+      }
     }
     case "SEARCH_TODO": {
       return {

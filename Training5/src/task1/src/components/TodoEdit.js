@@ -46,22 +46,21 @@ const EditForm = styled.form`
   }
 `;
 export default function TodoEdit() {
-  const id = useSelector((state) => state.todo.editTodoId);
-  const todos = useSelector((state) => state.todo.todos);
-  const todo = todos.find(todo=>(todo.id===id));
+  const getCurrentEditTodoId = useSelector((state) => state.todo);
   const isDisplay =  useSelector((state) => state.todo.isOpenForm);
   const [todoValue, setTodoValue] = useState('');
   
   const dispatch = useDispatch();
 
   useEffect(()=>{
+    const todo = getCurrentEditTodoId.todos.find(todo=>(todo.id===getCurrentEditTodoId.editTodoId));
     if (todo) setTodoValue(todo.name);
-  },[todo])
+  },[getCurrentEditTodoId])
 
   function handleSubmit(e) {
     e.preventDefault();
     const newTodo = {
-      ...todo,
+      id: getCurrentEditTodoId.id,
       name: todoValue,
     };
     const action = editTodo(newTodo);
